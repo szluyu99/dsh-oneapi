@@ -450,26 +450,29 @@ window.__ModuleLoader__.load({
         // The settings page is always registered, so the toggle stays reachable.
         ctx.effect(() => ctx.slots.inject(SLOT, () => ctx.slots.register({ name: SLOT, id: ID, order: ORDER, label: LABEL }, Panel)), 'oneapi.settings');
 
-        // Live sidebar registration: subscribe to the shared flag and (un)register
-        // the rail icon + central panel immediately when it flips.
-        let disposeSidebar = null;
-        const syncSidebar = (show) => {
+        // The central panel is always registered: "show in sidebar" only controls
+        // the rail icon, so unchecking it while the panel is open no longer
+        // unmounts the page the user is currently looking at.
+        ctx.effect(() => ctx.slots.inject('main', () => ctx.slots.register({ name: 'main', key: ID }, SidebarPanel)), 'oneapi.main');
+
+        // Live rail registration: subscribe to the shared flag and (un)register
+        // the rail icon immediately when it flips.
+        let disposeRail = null;
+        const syncRail = (show) => {
           if (show) {
-            if (!disposeSidebar) {
-              const d1 = ctx.slots.inject('main', () => ctx.slots.register({ name: 'main', key: ID }, SidebarPanel), 'oneapi.main');
-              const d2 = ctx.slots.inject('sidebar.panellist', () => ctx.slots.register({ name: 'sidebar.panellist', id: ID, order: SIDEBAR_ORDER, label: () => LABEL }, RailIcon), 'oneapi.panellist');
-              disposeSidebar = () => { try { d1(); } catch {} try { d2(); } catch {} };
+            if (!disposeRail) {
+              disposeRail = ctx.slots.inject('sidebar.panellist', () => ctx.slots.register({ name: 'sidebar.panellist', id: ID, order: SIDEBAR_ORDER, label: () => LABEL }, RailIcon), 'oneapi.panellist');
             }
-          } else if (disposeSidebar) {
-            disposeSidebar(); disposeSidebar = null;
+          } else if (disposeRail) {
+            try { disposeRail(); } catch {} disposeRail = null;
           }
         };
 
         ctx.effect(() => {
-          const unsub = subscribeSidebarShown(syncSidebar);
+          const unsub = subscribeSidebarShown(syncRail);
           return () => {
             unsub();
-            if (disposeSidebar) { try { disposeSidebar(); } catch {} disposeSidebar = null; }
+            if (disposeRail) { try { disposeRail(); } catch {} disposeRail = null; }
           };
         }, 'oneapi.sidebar-sync');
 
