@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "OneAPI gateway",
+    "description": "Configure and inspect the OneAPI provider route, API key, default model, and model catalog."
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "OneAPI 网关",
+    "description": "配置并查看 OneAPI 网关的 provider 路由、API Key、默认模型与模型清单。"
+  }
+}
