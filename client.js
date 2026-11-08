@@ -1,5 +1,5 @@
 window.__ModuleLoader__.load({
-  id: 'dsh-oneapi',
+  id: '@szluyu99/dsh-oneapi',
   factory(require) {
     const React = require('react');
     const h = React.createElement;

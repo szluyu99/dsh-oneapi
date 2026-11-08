@@ -1,5 +1,5 @@
 {
-  "name": "dsh-oneapi",
+  "name": "@szluyu99/dsh-oneapi",
   "version": "1.0.0",
   "description": "OneAPI gateway configuration and status panel for DeepSeek Harness.",
   "keywords": [

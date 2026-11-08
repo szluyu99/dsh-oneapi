@@ -1,4 +1,4 @@
-# dsh-oneapi
+# @szluyu99/dsh-oneapi
 
 DeepSeek Harness 插件：把 `@deepseek-ai/dsh-llm-pi-ai` 里的 `oneapi` provider 配置包成一个可视化面板 + 一组 agent 工具，省掉手改 profile 配置这一步。
 
@@ -39,6 +39,16 @@ DeepSeek Harness 插件：把 `@deepseek-ai/dsh-llm-pi-ai` 里的 `oneapi` provi
 - **HTTP API**：前端通过 `/api/oneapi/*` 访问 host 服务，路由为 `GET /status`、`POST /test`、`POST /save`、`POST /sync`、`POST /test-models`、`POST /test-model`。每个 handler 都做本机同源 + 请求围栏校验，所以从外部 `curl` 这些路由会返回 401——这是设计如此，不是故障。
 
 ## 安装
+
+### 从 npm 安装
+
+在 DSH 的插件管理里安装，target 填：
+
+```
+@szluyu99/dsh-oneapi
+```
+
+或者命令行 `npm install @szluyu99/dsh-oneapi`。
 
 ### 从 GitHub 安装
 

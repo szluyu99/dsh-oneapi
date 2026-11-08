@@ -1,5 +1,5 @@
 /**
- * dsh-oneapi — host half.
+ * @szluyu99/dsh-oneapi — host half.
  *
  * Wraps the existing `@deepseek-ai/dsh-llm-pi-ai` provider configuration with:
  *   - a settings page (client half) that reads/edits the `oneapi` provider route,
@@ -16,7 +16,7 @@ export const name = 'oneapi';
 export const inject = ['webServer', 'tools'];
 
 const LLM_ENTRY_NAME = '@deepseek-ai/dsh-llm-pi-ai';
-const OWN_ENTRY_NAME = 'dsh-oneapi';
+const OWN_ENTRY_NAME = '@szluyu99/dsh-oneapi';
 const PROVIDER = 'oneapi';
 
 function getConfigEditor(ctx) {
